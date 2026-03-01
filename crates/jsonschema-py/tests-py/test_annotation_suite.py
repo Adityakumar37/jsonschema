@@ -20,11 +20,12 @@ def load_test_cases():
         for suite_case in data.get("suite", []):
             schema = suite_case["schema"]
             description = suite_case.get("description", filename)
-            tests = suite_case.get("tests", [])
-            for test in tests:
+            for test in suite_case.get("tests", []):
                 instance = test["instance"]
                 assertions = test.get("assertions", [])
-                cases.append(pytest.param(schema, instance, assertions, id=f"{filename}::{description}"))
+                cases.append(
+                    pytest.param(schema, instance, assertions, id=f"{filename}::{description}")
+                )
     return cases
 
 
